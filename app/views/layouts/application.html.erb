@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vinterest</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class = "container">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <%= link_to "Pinterest", root_path, class: "navbar-brand"%>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item ">
+          <%= link_to "Home", root_path, class:"nav-link"%>
+        </li>
+        <li class="nav-item ">
+          <%= link_to "Pin", new_video_path, class:"nav-link"%>
+        </li>
+      </ul>
+      <ul class="navbar-nav my-2 my-lg-0">
+      <%# <%byebug%> %>
+        <% unless current_user.blank? %>
+            <li class="nav-item "><%=link_to 'Edit profile',edit_user_path(current_user), class:"nav-link"%></li>
+            <li class="nav-item  "><%=link_to 'log out',root_path, method: :delete, class:"nav-link"%></li>
+          <%else%>
+            <li class="nav-item  "><%= link_to 'log in', new_user_path, class:"nav-link"%></li>
+            <li class="nav-item  "><%= link_to 'sign up', new_user_path, class:"nav-link"%></li>
+          <% end %>
+      </ul>
+    </div>
+  </nav>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+  </div>
+  </body>
+</html>

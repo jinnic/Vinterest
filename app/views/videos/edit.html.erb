@@ -1,0 +1,12 @@
+<h1>Video Edit Form</h1>
+
+<%= form_for @video do |f|%>
+  <%=f.label :video_file_name%>
+  <%=f.text_field :video_file_name%>
+  </br>
+  <%=f.label :description%>
+  <%=f.text_field :description%>
+  </br>
+  <%=f.submit%>
+  </br>
+<%end%>

@@ -1,0 +1,11 @@
+<h1>Board New Form</h1>
+
+<%= form_for @board do |f|%>
+  <%=f.label :name%>
+  <%=f.text_field :name%>
+  </br>
+  <%=f.label :user%>
+  <%= f.collection_select( :user_id, @users, :id, :email )%>
+  <%=f.submit%>
+  </br>
+<%end%>

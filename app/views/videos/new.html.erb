@@ -1,0 +1,22 @@
+<h1>Video New Form</h1>
+
+<%= form_for @video do |f|%>
+  <%=f.label :video_file_name%>
+  <%=f.text_field :video_file_name%>
+  </br>
+  <%=f.label :description%>
+  <%=f.text_field :description%>
+  </br>
+  <%=f.label :video_src%>
+  <%=f.text_field :video_src%>
+  </br>
+  <%= f.label :board %>
+  <%= f.collection_select( :board_id, @boards, :id, :name )%>
+  
+  </br>
+  <%=f.label :user%>
+  <%= f.collection_select( :user_id, @users, :id, :email )%>
+  </br>
+  <%=f.submit%>
+  </br>
+<%end%>
