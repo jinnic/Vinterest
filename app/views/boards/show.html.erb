@@ -1,31 +1,25 @@
 <h3>Board : <%=@board.name%></h3>
 
-<div class ="row ">
-  <% @board.videos.each do |video|%>  
-    <div class ="col m-1">
-      
-      <div class ="video ">
-        <div class="card mb-3" style="width: 15rem;">
-          <div class="embed-responsive embed-responsive-4by3">
-            <%=video.src_modify(video.video_src).construct_iframe.html_safe%>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title"><%=video.video_file_name%></h5>
-            <p class="card-text"><%=video.description%></p>
-            <%= link_to 'Delete', video_path(video),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' }, 
-                    class: "card-link"%>
-            <%= link_to 'Edit', edit_video_path(video),
-                    class: "card-link"%>
-          </div>
-        </div>
-
+<%# card-columns  %>
+  <div class="row" data-masonry='{"percentPosition": true }'>
+    <% @board.videos.reverse.each do |video|%>   
+    <div class="col-sm-6 col-lg-4 mb-4" ">
+    <div class="card">
+      <div class="embed-responsive embed-responsive-4by3">
+        <%=video.src_modify(video.video_src).construct_iframe.html_safe%>
       </div>
-
+        <div class="card-body">
+          <h5 class="card-title"><%=video.video_file_name%></h5>
+          <p class="card-text"><%=video.description%></p>
+          <%= link_to 'Delete', video_path(video),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' }, 
+                        class: "card-link"%>
+                <%= link_to 'Edit', edit_video_path(video),
+                        class: "card-link"%>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>  
     </div>
-  <%end%>
-</div>
-
-
-
+    <%end%>
+  </div>

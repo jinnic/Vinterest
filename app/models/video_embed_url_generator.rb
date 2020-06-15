@@ -16,6 +16,12 @@ class VideoEmbedUrlGenerator
       "src='#{construct_url}'>"\
     '</iframe>'
   end
+  
+  def  construct_video(width="100%")
+    '<video controls '\
+      "src='#{construct_url} '" \
+      "width='#{width.to_s}>'"
+  end
 
   def  construct_url
     case video_provider

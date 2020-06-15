@@ -7,9 +7,13 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="//cdn.embed.ly/player-0.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+
   </head>
 
   <body>
+  
     <div class = "container">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
           <%= link_to "Pinterest", root_path, class: "navbar-brand"%>
@@ -42,5 +46,6 @@
         <p class="alert"><%= alert %></p>
         <%= yield %>
     </div>
+    
   </body>
 </html>
