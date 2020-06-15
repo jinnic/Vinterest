@@ -1,25 +1,24 @@
 <h3>Board : <%=@board.name%></h3>
-<div class ="row">
+
+<div class ="row ">
   <% @board.videos.each do |video|%>  
-    <div class ="col-md-3">
+    <div class ="col m-1">
       
-      <div class ="video">
-        <h3>Video_file_name  : <%=video.video_file_name%></h3>
-        <p>Description : <%=video.description%></p>
-        <p>URL : <%=video.video_src%></p>
-        <div class="embed-responsive embed-responsive-4by3">
-          <%=video.src_modify(video.video_src).construct_iframe.html_safe%>
-        </div>
-        <%= button_to 'Delete', video_path(video),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' },
-                    class: "btn btn-primary"%>
-        
-        <div class="card" style="width: 18rem;">
+      <div class ="video ">
+        <div class="card mb-3" style="width: 15rem;">
           <div class="embed-responsive embed-responsive-4by3">
             <%=video.src_modify(video.video_src).construct_iframe.html_safe%>
           </div>
-          
+          <div class="card-body">
+            <h5 class="card-title"><%=video.video_file_name%></h5>
+            <p class="card-text"><%=video.description%></p>
+            <%= link_to 'Delete', video_path(video),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' }, 
+                    class: "card-link"%>
+            <%= link_to 'Edit', edit_video_path(video),
+                    class: "card-link"%>
+          </div>
         </div>
 
       </div>

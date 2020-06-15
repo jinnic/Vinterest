@@ -23,6 +23,10 @@ class VideosController < ApplicationController
 
   # GET /videos/1/edit
   def  edit
+    @users = User.all
+    @boards = Board.all
+    @video = Video.find(params[:id])
+
   end
 
   # POST /videos
@@ -50,7 +54,9 @@ class VideosController < ApplicationController
   # PATCH/PUT /videos/1
   # PATCH/PUT /videos/1.json
   def update
-  
+    video = Video.find(params[:id])
+    video.update(video_params)
+    redirect_to board_path(video.board_id)
   end
 
   # DELETE /videos/1
