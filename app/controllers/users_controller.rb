@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   # validates :email, presence: true 
+  skip_before_action :authorized, only: [:new, :create]
+
 
   def index
     @users = User.all
@@ -11,28 +13,32 @@ class UsersController < ApplicationController
   end
 
   def create
+    user = User.create(user_params(:email, :password, :profile, :username))
+    session[:username] = user.username
+    redirect_to '/welcome'
     # user = @user.users.build(user_params(:description))
-    user = User.create(user_params(:email, :password, :profile))
-    redirect_to user_path(user)
+    # user = User.create(user_params(:email, :password, :profile, :username))
+    # redirect_to user_path(user)
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(username: params[:username])
   end
 
   def edit
-    @user = User.find(params[:id])
+    # byebug
+    @user = User.find_by(username: params[:username])
   end
 
   def update
     # byebug
-    user = User.find(params[:id])
-    user.update(user_params(:email, :password, :profile))
+    user = User.find_by(username: params[:username])
+    user.update(user_params(:email, :password, :profile, :username))
     redirect_to user_path(user)
   end
 
   def destroy
-    user = User.find(params[:id])
+    user = User.find_by(username: params[:username])
     user.destroy
     redirect_to users_path
   end

@@ -15,7 +15,7 @@
   
   </br>
   <%=f.label :user%>
-  <%= f.collection_select( :user_id, @users, :id, :email )%>
+  <%= f.collection_select( :user_id, @user, :id, :username )%>
   </br>
   <%=f.submit%>
   </br>

@@ -22,28 +22,42 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav mr-auto ">
             <li class="nav-item ">
               <%= link_to "Home", root_path, class:"nav-link"%>
             </li>
             <li class="nav-item ">
-              <%= link_to "Pin", new_video_path, class:"nav-link"%>
+              <%= link_to "Videos", videos_path, class:"nav-link"%>
+            </li>
+            <li class="nav-item ">
+              <%= link_to "add video", new_video_path, class:"nav-link"%>
             </li>
           </ul>
+          <ul class="navbar-nav my-2 my-lg-0  navbar-center">
+          <form class="navbar-form form-inline" id="search" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <%# <button type="submit" class="btn btn-default">Submit</button>  %>
+            </div>
+          </form>
+          </ul>
           <ul class="navbar-nav my-2 my-lg-0">
-          <%# <%byebug%> %>
+          <%#byebug%> 
             <% unless current_user.blank? %>
-                <li class="nav-item "><%=link_to 'Edit profile',edit_user_path(current_user), class:"nav-link"%></li>
-                <li class="nav-item  "><%=link_to 'log out',root_path, method: :delete, class:"nav-link"%></li>
+                <li class="nav-item "><%=link_to 'Edit profile', edit_user_path(current_user), class:"nav-link"%></li>
+                <li class="nav-item  "><%=link_to 'Log out',logout_path, method: :delete, class:"nav-link"%></li>
               <%else%>
-                <li class="nav-item  "><%= link_to 'log in', new_user_path, class:"nav-link"%></li>
-                <li class="nav-item  "><%= link_to 'sign up', new_user_path, class:"nav-link"%></li>
+                <li class="nav-item  "><%= link_to 'Log in', login_path, class:"nav-link"%></li>
+                <li class="nav-item  "><%= link_to 'Sign up', new_user_path, class:"nav-link"%></li>
               <% end %>
           </ul>
         </div>
       </nav>
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
+        <% if logged_in? %>
+            <h1>You are Logged In, <%= current_user.username %></h1>
+        <%end%>
         <%= yield %>
     </div>
     

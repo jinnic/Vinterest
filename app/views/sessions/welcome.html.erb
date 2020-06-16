@@ -1,5 +1,8 @@
 
-
+<h1>Welcome</h1>
+<% if logged_in? %>
+    <h1>You are Logged In, <%= current_user.username %></h1>
+<%end%>
   <div class="row mt-5" data-masonry='{"percentPosition": true }'>
     <% @videos.reverse.each do |video|%>   
     <div class="col-sm-6 col-lg-4 mb-4" ">
@@ -10,8 +13,7 @@
         <div class="card-body">
           <h5 class="card-title"><%=video.video_file_name%></h5>
           <p class="card-text"><%=video.description%></p>
-          <p class="card-text"><%=video.user.username%></p>
-          <p class="card-text"><%= link_to video.board.name, board_path(video.board), class: "card-link"%></p>
+          <p class="card-text"><%=video.user.username%> | <%= link_to video.board.name, board_path(video.board), class: "card-link"%></p>
           <p class="card-text"><small class="text-muted">Last updated <%= video.time_diffrence(video)%> ago</small></p>
         </div>
     </div>  

@@ -5,7 +5,14 @@ class VideosController < ApplicationController
   #
   # GET /videos
   def index
-    @videos = Video.all
+    videos = Video.all
+    @videos = []
+    videos.each do |video|
+      if video.board.public
+        @videos << video
+      end
+    end
+    @videos
   end
 
   # GET /videos/1
@@ -16,9 +23,9 @@ class VideosController < ApplicationController
 
   # GET /videos/new
   def new
-    @users = User.all
+    user = current_user
     @video = Video.new
-    @boards = Board.all
+    @boards = user.boards
   end
 
   # GET /videos/1/edit
@@ -33,11 +40,11 @@ class VideosController < ApplicationController
   def create
  
 
-    # @user = current_user
-    # video = @user.videos.build(video_params(:description))
+    @user = current_user
+    video = @user.videos.build(video_params)
     # @video = current_user.videos.build(video_params)
     
-    video = Video.create(video_params)
+    # video = Video.create(video_params)
     # respond_to do |format|
     #   if @video.save
     #     format.html { redirect_to videos_path, notice: 'Video was successfully created.' }
