@@ -17,7 +17,7 @@
                         class: "card-link"%>
                 <%= link_to 'Edit', edit_video_path(video),
                         class: "card-link"%>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <p class="card-text"><small class="text-muted">Last updated <%= video.time_diffrence(video)%> ago</small></p>
         </div>
     </div>  
     </div>
