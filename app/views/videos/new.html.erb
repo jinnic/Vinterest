@@ -12,10 +12,6 @@
   </br>
   <%= f.label :board %>
   <%= f.collection_select( :board_id, @boards, :id, :name )%>
-  
-  </br>
-  <%=f.label :user%>
-  <%= f.collection_select( :user_id, @user, :id, :username )%>
   </br>
   <%=f.submit%>
   </br>

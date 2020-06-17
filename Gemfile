@@ -11,6 +11,8 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 # # gem 'trollop', '~> 2.1', '>= 2.1.2'
 # gem 'optimist', '~> 3.0', '>= 3.0.1'
 
+#for modal for bootstrap
+gem 'popper_js', '~> 1.14.5'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'

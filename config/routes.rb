@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :boards
+  
   resources :videos
-  resources :users, only: [:new, :create, :edit]
+  
   get 'welcome', to: 'sessions#welcome'
   
 
@@ -14,8 +14,17 @@ Rails.application.routes.draw do
   
   get 'authorized', to: 'sessions#page_requires_login'
   delete 'logout', to: 'sessions#destroy'
-  get ':username', to: 'users#show', as: :user
+  
+  resources :boards
 
+  get ':username/edit', to: 'users#edit', as: :edit_user
+  get ':username', to: 'users#show', as: :user
+  
+
+  patch 'users/:id', to: 'users#update', as: :update_user
+  resources :users , only: [:new, :create]
   root 'videos#index'
+
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -15,4 +15,17 @@ class Video < ApplicationRecord
       TimeDifference.between(now, self.updated_at.time).humanize
     end
   end
+  
+
+  def self.all_videos
+    videos = Video.all
+    @videos = []
+    videos.each do |video|
+      if video.board.public
+        @videos << video
+      end
+    end
+    @videos
+    # byebug
+  end
 end

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.create(user_params(:email, :password, :profile, :username))
-    session[:username] = user.username
+    session[:user_id] = user.id
     redirect_to '/welcome'
     # user = @user.users.build(user_params(:description))
     # user = User.create(user_params(:email, :password, :profile, :username))
@@ -22,23 +22,32 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(username: params[:username])
+    @user = current_user 
+    @videos = user_video
+    
+    # @user = User.find_by(id: params[:username])
+    # @user = User.find_by(username: params[:username])
   end
 
   def edit
+    
+    @user = current_user
     # byebug
-    @user = User.find_by(username: params[:username])
   end
 
   def update
     # byebug
-    user = User.find_by(username: params[:username])
+    
+    user = User.find_by(id: params[:id])
     user.update(user_params(:email, :password, :profile, :username))
-    redirect_to user_path(user)
+
+    flash[:notice] = "Succesfully updated #{user.username.capitalize}'s profile!" 
+    redirect_to user_path(username: user.username)
   end
 
   def destroy
-    user = User.find_by(username: params[:username])
+    user = User.find_by(id: params[:id])
+    # user = User.find_by(username: params[:username])
     user.destroy
     redirect_to users_path
   end
@@ -47,5 +56,16 @@ class UsersController < ApplicationController
 
   def user_params(*arg)
     params.require(:user).permit(arg)
+  end
+
+  def user_video
+    @videos = []
+    videos = Video.all
+    videos.each do |video|
+      if video.user.username == current_user.username || video.board.public 
+        @videos << video
+      end
+    end
+    @videos
   end
 end

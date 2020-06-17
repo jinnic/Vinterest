@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_06_16_042737) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "public"
+    t.boolean "public", default: false
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
 

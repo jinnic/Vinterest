@@ -1,6 +1,51 @@
 
-<%@boards.each do |board|%>
-<div>
-  <h3>Board name : <%=link_to "#{board.name}", board_path(board)%> | User : <%=link_to "#{board.user_id}", user_path(board.user_id)%></h3>
+<div class="sticky-top">
+  <div class="row mt-4 mb-2 title-div">
+    <font style="vertical-align: inherit;">
+      <p class="text-center title" > <%=current_user.username.capitalize%>'s boards</p>
+    </font>
+  </div>
+  <div class="mb-5 sub-title">
+      <div class="right mt-4 mr-2">
+        <%= link_to "add board", new_board_path%>
+      </div>
+      <p class="text-center", style="padding: 0 100px;" >
+        <%=current_user.private_board_count(current_user.id)%> Secret board | <%=current_user.public_board_count(current_user.id)%> Public board 
+      </p>
+  </div>
+  
 </div>
-<%end%>
+            
+<div class="row mt-5">
+<%# <div class="card-deck m-3 mx-auto text-center"> %>
+
+    <% @boards.reverse.each do |board|%>   
+    <% video = board.videos.first%>  
+    <div class="col-sm-6 col-lg-4 mb-4" ">
+    <div class="card m-2" >
+    <h5 class="card-header">
+      <%=link_to "#{board.name.capitalize}", board_path(board)%> 
+      <%unless board.public %>
+        <%= image_tag(src="icons/lock-fill.svg", size: '15', class: "lock-icon")%> 
+      <%end%>
+      <span class="right"><%=link_to image_tag(src="icons/pencil-fill.svg", size: '20', class: "edit-icon "), edit_board_path(board)%><span>
+    </h5>
+      <%if board.videos.empty?%>
+        <%=image_tag src="video-placeholder.jpg", class: "card-img-top embed-responsive embed-responsive-4by3"%>
+      <%else%>
+        <div class="embed-responsive embed-responsive-4by3">
+          <%=video.src_modify(video.video_src).construct_iframe.html_safe%>
+        </div>
+      <%end%>
+        <div class="card-body">
+          <p class="card-text"> <%= board.videos.count%> videos <span class="text-right"><%=link_to "#{board.user.username}", user_path(board.user.username)%></span></p>
+          <p class="card-text"> </p>
+
+          <p class="card-text"><small class="text-muted">Last updated <%= board.time_diffrence(board)%> ago</small></p>
+
+        </div>
+    </div> 
+    </div> 
+    <%end%>
+</div>
+<%# </div> %>

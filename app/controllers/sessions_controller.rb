@@ -3,28 +3,22 @@ class SessionsController < ApplicationController
   
   def new
     # byebug
+    flash.now[:success] = "Welcome Back #{@user.username.capitalize}!"
+    # 
   end
 
   def create
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
-        # byebug
-        session[:username] = user.username
-        redirect_to user_path(user.username)
+        session[:user_id] = user.id 
+        redirect_to user_path(user)
     else
       redirect_to '/login'
     end
   end
 
   def welcome
-    videos = Video.all
-    @videos = []
-    videos.each do |video|
-      if video.board.public
-        @videos << video
-      end
-    end
-    @videos
+    @videos = Video.all_videos
   end
 
   def login
@@ -35,9 +29,8 @@ class SessionsController < ApplicationController
 
   def destroy
     # byebug
-    session.delete :username
-
-    # redirect_to root_path
+    session.delete :user_id
+    redirect_to root_path
   end
 
   

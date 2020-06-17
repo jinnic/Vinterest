@@ -1,0 +1,11 @@
+<h3>Board : <%=@board.name%></h3>
+<%= form_for @board do |f|%>
+  <%=f.label :name%>
+  <%=f.text_field :name%>
+  </br>
+  <%= f.radio_button :public, include_hidden: true %>
+  <%= f.label :public %>
+  </br>
+  <%=f.submit%>
+  </br>
+<%end%>

@@ -4,9 +4,10 @@
     <title>Vinterest</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/77bbde81ff.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//cdn.embed.ly/player-0.1.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 
@@ -16,21 +17,24 @@
   
     <div class = "container">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-          <%= link_to "Pinterest", root_path, class: "navbar-brand"%>
+        <% if current_user.blank? %>
+          <%= link_to "Vinterest", root_path, class: "navbar-brand"%>
+        <% else %>
+          <%= link_to "Vinterest", user_path(current_user.username), class: "navbar-brand"%>
+        <%end%>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto ">
+          <% unless current_user.blank? %>
             <li class="nav-item ">
-              <%= link_to "Home", root_path, class:"nav-link"%>
+              <%= link_to "Boards", boards_path, class:"nav-link"%>
             </li>
+          <%end%>
             <li class="nav-item ">
               <%= link_to "Videos", videos_path, class:"nav-link"%>
-            </li>
-            <li class="nav-item ">
-              <%= link_to "add video", new_video_path, class:"nav-link"%>
             </li>
           </ul>
           <ul class="navbar-nav my-2 my-lg-0  navbar-center">
@@ -53,13 +57,16 @@
           </ul>
         </div>
       </nav>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+
         <% if logged_in? %>
             <h1>You are Logged In, <%= current_user.username %></h1>
         <%end%>
+        <% flash.each do |type, msg| %>
+          <div id="flash" class="<%= flash_class(type) %>">
+            <%= msg %>
+          </div>
+        <% end %>
         <%= yield %>
     </div>
-    
   </body>
 </html>

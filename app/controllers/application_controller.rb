@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authorized
   helper_method :current_user, :logged_in?
+  add_flash_types :info, :error, :warning
 
   def current_user
     #  byebug

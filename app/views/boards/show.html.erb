@@ -1,9 +1,9 @@
-<h3>Board : <%=@board.name%></h3>
-
+<%= render "title" %>
 <%# card-columns  %>
   <div class="row" data-masonry='{"percentPosition": true }'>
     <% @board.videos.reverse.each do |video|%>   
-    <div class="col-sm-6 col-lg-4 mb-4" ">
+     
+    <div class="col-sm-6 col-lg-4 mb-4">
     <div class="card">
       <div class="embed-responsive embed-responsive-4by3">
         <%=video.src_modify(video.video_src).construct_iframe.html_safe%>

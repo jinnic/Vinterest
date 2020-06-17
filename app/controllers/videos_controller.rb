@@ -5,14 +5,11 @@ class VideosController < ApplicationController
   #
   # GET /videos
   def index
-    videos = Video.all
-    @videos = []
-    videos.each do |video|
-      if video.board.public
-        @videos << video
-      end
-    end
-    @videos
+   if logged_in?
+      @videos = user_video
+   else
+      @videos = Video.all_videos
+   end
   end
 
   # GET /videos/1
@@ -23,9 +20,9 @@ class VideosController < ApplicationController
 
   # GET /videos/new
   def new
-    user = current_user
+    @user = current_user
+    @boards = @user.boards
     @video = Video.new
-    @boards = user.boards
   end
 
   # GET /videos/1/edit
@@ -38,10 +35,10 @@ class VideosController < ApplicationController
 
   # POST /videos
   def create
- 
-
+    # byebug
     @user = current_user
     video = @user.videos.build(video_params)
+    video.save
     # @video = current_user.videos.build(video_params)
     
     # video = Video.create(video_params)
@@ -61,6 +58,7 @@ class VideosController < ApplicationController
   # PATCH/PUT /videos/1
   # PATCH/PUT /videos/1.json
   def update
+    byebug
     video = Video.find(params[:id])
     video.update(video_params)
     redirect_to board_path(video.board_id)
@@ -102,6 +100,17 @@ class VideosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
       params.require(:video).permit(:description, :video_file_name, :board_id, :user_id, :video_src)
+    end
+
+    def user_video
+      @videos = []
+      videos = Video.all
+      videos.each do |video|
+        if video.user.username == current_user.username || video.board.public 
+          @videos << video
+        end
+      end
+      @videos
     end
 
 end

@@ -5,32 +5,36 @@ class BoardsController < ApplicationController
 
   def new
     @board = Board.new
-    @users = User.all
     # @board = @board.board.build
   end
 
   def create
-    # board = @board.boards.build(board_params(:description))
-    board = Board.create(board_params(:name, :user_id, :public))
+    @user = current_user
+    # byebug
+    board = @user.boards.build(board_params)
+    board.save
     redirect_to board_path(board)
   end
 
   def show
-     
     @board = Board.find(params[:id])
-    if !@board.public
-      redirect_to_back_or_default
+    if !@board.public && !current_user 
+       redirect_to_back_or_default
     end
   end
 
   def edit
     @board = Board.find(params[:id])
+    respond_to do |format|
+      format.js 
+      format.html
+    end
   end
 
   def update
     # byebug
     board = Board.find(params[:id])
-    board.update(board_params(:name, :user_id, :public))
+    board.update(board_params)
 
     redirect_to board_path(board)
   end
@@ -43,8 +47,8 @@ class BoardsController < ApplicationController
 
   private
 
-  def board_params(*arg)
-    params.require(:board).permit(arg)
+  def board_params
+    params.require(:board).permit(:name, :user_id, :public)
   end
 
   def redirect_to_back_or_default(default = root_url)
@@ -54,4 +58,5 @@ class BoardsController < ApplicationController
       redirect_to default
     end
   end
+
 end

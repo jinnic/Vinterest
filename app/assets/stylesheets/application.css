@@ -18,7 +18,7 @@
 #search{
   display:block;
   text-align:center;
-  width: 400px;
+  width: 30rem;
 }
 
 .navbar-nav.navbar-center { 
@@ -29,4 +29,53 @@
 
 .form-control{
   width: 100% !important;
+}
+
+.edit-icon {
+  filter: invert(.5) 
+  /* filter: invert(97%) sepia(6%) saturate(23%) hue-rotate(202deg) brightness(97%) contrast(95%); */
+}
+.lock-icon {
+  filter: invert(.5) 
+  /* filter: invert(97%) sepia(6%) saturate(23%) hue-rotate(202deg) brightness(97%) contrast(95%); */
+}
+
+.edit-icon:hover {
+  filter: invert(.5) sepia(1);
+}
+
+.right{
+  position: relative;
+  float: right;
+}
+
+.left{
+  position: relative;
+  float: left;
+}
+
+.title{
+  vertical-align: inherit;
+  font-family: SANS-SERIF;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+.title-div{
+  justify-content: center; 
+  display: flex; 
+  flex-direction: row;
+}
+
+.sub-title{
+  color: #6c757d;
+
+}
+
+.card{
+  overflow: hidden !important;
+}
+
+.v-center{
+  padding: 1rem;
 }
