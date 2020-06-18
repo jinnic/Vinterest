@@ -4,6 +4,9 @@ class VideosController < ApplicationController
   # before_action :correct_user, only: [:edit, :update, :destroy]
   #
   # GET /videos
+  
+  @@search_videos = []
+  
   def index
    if logged_in?
       @videos = user_video
@@ -20,6 +23,7 @@ class VideosController < ApplicationController
 
   # GET /videos/new
   def new
+    # byebug
     @user = current_user
     @boards = @user.boards
     @video = Video.new
@@ -27,8 +31,8 @@ class VideosController < ApplicationController
 
   # GET /videos/1/edit
   def  edit
-    @users = User.all
-    @boards = Board.all
+    @user = current_user
+    @boards = @user.boards
     @video = Video.find(params[:id])
   end
 
@@ -61,7 +65,7 @@ class VideosController < ApplicationController
 
   # get /videos/1
   def  delete_img
-    byebug
+    # byebug
     video = Video.find(params[:id])
     board = video.board_id
     video.destroy
@@ -90,14 +94,45 @@ class VideosController < ApplicationController
   end
 
   def search
-     
-    @search_videos = get_video(params[:search])
-    unless @search_videos
+    search_videos = get_video(params[:search])
+    unless search_videos
       flash[:alert] = 'videos not found'
       return render action: :index
     end
-    byebug
-    render 'layouts/search'
+    @search_videos = []
+    @@search_videos = []
+    count = 0
+    search_videos.each do |video|
+      
+      @@search_videos << {
+                          id: "#{count}", description: "#{video[:description]}",
+                          video_file_name: "#{video[:title]}", 
+                          video_src: "#{(video[:videoId])}"
+                        }
+      count += 1
+    end
+    # byebug
+    @search_videos = @@search_videos
+    # @video = Video.newbyebug
+    render template: 'videos/search'
+  end
+
+  def search_new
+    # byebug
+    @s_video = []
+    @@search_videos.each do |video|
+      byebug
+       if video[:id] == params[:id]
+        byebug
+          @s_video = video
+       end
+    end
+    @s_video
+    @user = current_user
+    @boards = @user.boards
+    @video = Video.new
+    # byebug
+    render template: 'videos/add_new'
   end
 
   private
@@ -143,24 +178,6 @@ class VideosController < ApplicationController
     def construct_url(video_id)
         "https://www.youtube.com/embed/#{video_id}"
     end
-  
-    def construct_iframe(width="640",height="480")
-      '<iframe '\
-        'class="embed-responsive-item"'\
-        "width=#{width.to_s} "\
-        "height=#{height.to_s}"\
-        'allow="autoplay; fullscreen" '\
-        'allowfullscreen, '\
-        "src='#{construct_url}'>"\
-      '</iframe>'
-    end
-    
-    def construct_video(width="100%")
-      '<video controls '\
-        "src='#{construct_url} '" \
-        "width='#{width.to_s}>'"
-    end
-  
     #construct iframe for each video
     # @video_searches.each do |video|
     #   construct_iframe(construct_url(video[:videoId]))

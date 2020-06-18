@@ -1,6 +1,8 @@
-<h1>Video Edit Form</h1>
-<div class ="video ">
-        <div class="card mb-3" style="width: 15rem;">
+<div class="form-group-center  col-6" >
+<h5>Video Edit Form</h5>
+
+<div class ="video">
+        <div class="card card-show mb-3 " style="width: 100%">
           <div class="embed-responsive embed-responsive-4by3">
             <%=@video.src_modify(@video.video_src).construct_iframe.html_safe%>
           </div>
@@ -25,4 +27,4 @@
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
 <%end%>
-
+</div>

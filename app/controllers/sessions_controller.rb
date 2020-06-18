@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
   end
 
   def welcome
+    @video = Video.new
     @videos = Video.all_videos
   end
 

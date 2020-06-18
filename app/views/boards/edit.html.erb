@@ -1,3 +1,5 @@
+<div class="form-group-center  col-6" >
+
 <h3>Board : <%=@board.name%></h3>
 <%= form_for @board do |f|%>
   <%=f.label :name%>
@@ -11,3 +13,4 @@
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
 <%end%>
+</div>

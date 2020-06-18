@@ -3,7 +3,11 @@
     <% @videos.reverse.each do |video|%>   
     <div class="col-sm-6 col-lg-4 mb-4" ">
     <div class="card">
-    
+    <h5 class="card-header">
+      <div class="video-btn-wrapper">
+        <span class="right"><%=link_to image_tag(src="icons/pencil-fill.svg", size: '20', class: "edit-icon "), edit_video_path(video)%><span>
+        <span class="right"><%=link_to image_tag(src="icons/x-circle-fill.svg", size: '20', class: "delete-icon "), delete_video_path(video)%><span>
+    </h5>
       <div class="embed-responsive embed-responsive-4by3">
         <%=video.src_modify(video.video_src).construct_iframe.html_safe%>
       </div>
@@ -23,6 +27,5 @@
     </div>  
     </div>
     <%end%>
-    <script async="" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script>
 
   </div>

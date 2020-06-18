@@ -1,0 +1,32 @@
+
+<div class="form-group-center  col-6" >
+<h1>Video Edit Form</h1>
+<div class ="video ">
+<%#byebug%>
+        <div class="card mb-3" style="width: 15rem;">
+          <div class="embed-responsive embed-responsive-4by3">
+             <%=construct_video_iframe(@s_video[:video_src]).html_safe%>
+          </div>
+        </div>
+</div>
+
+
+<%= form_for @video, url: {action: "create"} do |f|%>
+  <%=f.label :video_file_name%>
+  <%=f.text_field :video_file_name, value:  "#{@s_video[:video_file_name]}"%>
+  </br>
+  <%=f.label :description%>
+  <%=f.text_field :description, value: "#{@s_video[:description]}"%>
+  </br>
+  <%=f.label :video_src%>
+  <%=f.text_field :video_src, value: "#{construct_yt_url(@s_video[:video_src])}"%>
+  </br>
+  <%= f.label :board %>
+  <%= f.collection_select( :board_id, @boards, :id, :name )%>
+
+  </br>
+  <%=f.submit%>
+<%end%>
+</div>
+
+

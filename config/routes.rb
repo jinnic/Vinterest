@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
   root 'videos#index'
+  get '/add_video/:id', to: 'videos#search_new', as: :add_search_video
   resources :videos
   get 'video/:id', to: 'videos#delete_img', as: :delete_video
-  get 'search', to: 'videos#search', as: :search
+  
+  
+  get '/search', to: 'videos#search'
+  
   get 'welcome', to: 'sessions#welcome'
   
 

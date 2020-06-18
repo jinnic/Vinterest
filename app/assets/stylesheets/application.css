@@ -33,12 +33,11 @@
 .form-control{
   width: 100% !important;
 }
-
-.edit-icon {
+.lock-icon {
   filter: invert(.5) 
   /* filter: invert(97%) sepia(6%) saturate(23%) hue-rotate(202deg) brightness(97%) contrast(95%); */
 }
-.lock-icon {
+.edit-icon {
   filter: invert(.5) 
   /* filter: invert(97%) sepia(6%) saturate(23%) hue-rotate(202deg) brightness(97%) contrast(95%); */
 }
@@ -52,6 +51,16 @@
 }
 
 .delete-icon:hover {
+  filter: invert(.5) sepia(1);
+  margin-left: 0.3rem
+}
+
+.add-icon{
+  filter: invert(.5);
+  margin-left: 0.3rem
+}
+
+.add-icon:hover {
   filter: invert(.5) sepia(1);
   margin-left: 0.3rem
 }
@@ -118,7 +127,7 @@
 
 .form-group-center{
   margin: auto;
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 .form-group-center input{

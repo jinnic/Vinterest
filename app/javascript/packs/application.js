@@ -28,4 +28,3 @@ import { definitionsFromContext } from "stimulus/webpack-helpers"
 import "bootstrap"
 import "../stylesheets/application"
 
-<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script>
