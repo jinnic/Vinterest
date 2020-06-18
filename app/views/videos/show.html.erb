@@ -4,8 +4,10 @@
   <div class="card card-show mb-3 col-8" style="width: 100%">
         <h5 class="card-header">
       <div class="video-btn-wrapper">
+      <% if video.user == current_user%>
         <span class="right"><%=link_to image_tag(src="icons/pencil-fill.svg", size: '20', class: "edit-icon "), edit_video_path(video)%><span>
         <span class="right"><%=link_to image_tag(src="icons/x-circle-fill.svg", size: '20', class: "delete-icon "), delete_video_path(video)%><span>
+      <%end%>
     </h5>
       <div class="embed-responsive embed-responsive-4by3">
         <%=video.src_modify(video.video_src).construct_iframe.html_safe%>

@@ -5,11 +5,13 @@
      
     <div class="col-sm-6 col-lg-4 mb-4">
     <div class="card">
+    <% if @board.user == current_user%>
     <h5 class="card-header">
       <div class="video-btn-wrapper">
         <span class="right"><%=link_to image_tag(src="icons/pencil-fill.svg", size: '20', class: "edit-icon "), edit_video_path(video)%><span>
         <span class="right"><%=link_to image_tag(src="icons/x-circle-fill.svg", size: '20', class: "delete-icon "), delete_video_path(video)%><span>
     </h5>
+    <%end%>
       <div class="embed-responsive embed-responsive-4by3">
         <%=video.src_modify(video.video_src).construct_iframe.html_safe%>
       </div>
