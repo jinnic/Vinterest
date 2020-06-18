@@ -6,7 +6,7 @@ class ApiYoutube
   # yt_hash["items"][0]["id"]["videoId"]
   # yt_json = self.get_videos(query)
   URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&q="
-  TOKEN = "&key=AIzaSyDIyF-eB7SDJx6JhXIkd_9qWbfCLZH_2-s"
+  TOKEN = 
   VIDEO_ONLY = "&type=video&videoEmbeddable=true"
 
 
