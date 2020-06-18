@@ -1,10 +1,4 @@
 
-<% if logged_in? %>
-    <h1>You are Logged In, <%= current_user.username %></h1>
-<% else %>
-    <h1>Welcome to Vinterest</h1>
-<%end%>
-
   <div class="row mt-5" data-masonry='{"percentPosition": true }'>
     <% @videos.reverse.each do |video|%>   
     <div class="col-sm-6 col-lg-4 mb-4" ">
@@ -22,7 +16,5 @@
     </div>  
     </div>
     <%end%>
-  
-  </div>
 
-  <script async="" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script>
+  </div>

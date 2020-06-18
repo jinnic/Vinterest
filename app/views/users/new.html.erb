@@ -1,6 +1,6 @@
 <h1>User New Form</h1>
 
-<%= form_for current_user do |f|%>
+<%= form_for @user do |f|%>
   <%=f.label :username%>
   <%=f.text_field :username%>
   </br>

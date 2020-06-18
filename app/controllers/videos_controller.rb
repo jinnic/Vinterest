@@ -5,7 +5,9 @@ class VideosController < ApplicationController
   #
   # GET /videos
   def index
+    # byebug
    if logged_in?
+    
       @videos = user_video
    else
       @videos = Video.all_videos
@@ -39,26 +41,12 @@ class VideosController < ApplicationController
     @user = current_user
     video = @user.videos.build(video_params)
     video.save
-    # @video = current_user.videos.build(video_params)
-    
-    # video = Video.create(video_params)
-    # respond_to do |format|
-    #   if @video.save
-    #     format.html { redirect_to videos_path, notice: 'Video was successfully created.' }
-    #     format.json { render :show, status: :created, location: @video }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @video.errors, status: :unprocessable_entity }
-    #   end
-    # end
-    
     redirect_to board_path(video.board_id) 
   end
 
   # PATCH/PUT /videos/1
   # PATCH/PUT /videos/1.json
   def update
-    byebug
     video = Video.find(params[:id])
     video.update(video_params)
     redirect_to board_path(video.board_id)
@@ -91,15 +79,31 @@ class VideosController < ApplicationController
     end
   end
 
+  def search
+     
+    @search_videos = get_video(params[:search])
+    unless @search_videos
+      flash[:alert] = 'videos not found'
+      return render action: :index
+    end
+    byebug
+    render 'layouts/search'
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_video
       @video = Video.find(params[:id])
     end
 
+    def search_params
+      params.permit(:search)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:description, :video_file_name, :board_id, :user_id, :video_src)
+      params.require(:video).permit(:video_file_name, :description, :video_src, :board_id, :user_id, :search)
     end
 
     def user_video
@@ -112,5 +116,41 @@ class VideosController < ApplicationController
       end
       @videos
     end
+# API
+  
+    def search_show
+    end
+  
+    def get_video(query)
+      yt_api = ApiYoutube.new(query)
+      @video_searches = yt_api.video
+    end
+  
+    def construct_url(video_id)
+        "https://www.youtube.com/embed/#{video_id}"
+    end
+  
+    def construct_iframe(width="640",height="480")
+      '<iframe '\
+        'class="embed-responsive-item"'\
+        "width=#{width.to_s} "\
+        "height=#{height.to_s}"\
+        'allow="autoplay; fullscreen" '\
+        'allowfullscreen, '\
+        "src='#{construct_url}'>"\
+      '</iframe>'
+    end
+    
+    def construct_video(width="100%")
+      '<video controls '\
+        "src='#{construct_url} '" \
+        "width='#{width.to_s}>'"
+    end
+  
+    #construct iframe for each video
+    # @video_searches.each do |video|
+    #   construct_iframe(construct_url(video[:videoId]))
+    #   video.
+    # end
 
 end

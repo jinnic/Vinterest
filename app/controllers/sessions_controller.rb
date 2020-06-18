@@ -3,8 +3,7 @@ class SessionsController < ApplicationController
   
   def new
     # byebug
-    flash.now[:success] = "Welcome Back #{@user.username.capitalize}!"
-    # 
+
   end
 
   def create
@@ -19,6 +18,7 @@ class SessionsController < ApplicationController
 
   def welcome
     @videos = Video.all_videos
+    # flash.now[:success] = "Welcome Back #{@user.username.capitalize}!"
   end
 
   def login
@@ -27,8 +27,7 @@ class SessionsController < ApplicationController
   def page_requires_login
   end
 
-  def destroy
-    # byebug
+  def logout
     session.delete :user_id
     redirect_to root_path
   end

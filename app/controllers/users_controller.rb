@@ -46,6 +46,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    byebug
     user = User.find_by(id: params[:id])
     # user = User.find_by(username: params[:username])
     user.destroy

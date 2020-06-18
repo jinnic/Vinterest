@@ -79,3 +79,8 @@
 .v-center{
   padding: 1rem;
 }
+
+.search{
+  width: 80% !important; 
+  text-align: left;
+}
