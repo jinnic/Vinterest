@@ -16,18 +16,22 @@
  */
 
 .container{
-  padding-top: 50px;
+  padding-top: 90px;
+  margin-top: 1re
 }
 #search{
   display:block;
-  text-align:center;
-  width: 30rem;
+  width: 300px !important;
+  margin: auto;
+  /* text-align:center; */
+  /* width: 30rem; */
 }
 
 .navbar-nav.navbar-center { 
   position: absolute; 
   left: 50%; 
   transform: translatex(-50%); 
+  /* width: 700px; */
 } 
 
 .form-control{

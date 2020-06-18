@@ -121,9 +121,9 @@ class VideosController < ApplicationController
     # byebug
     @s_video = []
     @@search_videos.each do |video|
-      byebug
+      # byebug
        if video[:id] == params[:id]
-        byebug
+        # byebug
           @s_video = video
        end
     end
