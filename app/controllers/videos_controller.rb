@@ -38,9 +38,23 @@ class VideosController < ApplicationController
 
   # POST /videos
   def create
-    # byebug
+    
     @user = current_user
+    
+    
+    board = Board.new
     video = @user.videos.build(video_params)
+    if !params[:video][:board].nil?  
+      if !params[:video][:board].empty? 
+        name = params[:video][:board]
+        board = current_user.boards.build(name: name)
+        board.save
+        video.board_id = board.id
+      # byebug
+      end 
+    end
+    
+    
     video.save
 
     redirect_to board_path(video.board_id) 

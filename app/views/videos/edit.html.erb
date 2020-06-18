@@ -23,8 +23,9 @@
 
   </br>
   <%=f.submit%>
-  <%= button_to 'Delete', video_path(@video),
+  
+<%end%>
+<%= button_to 'Delete', video_path(@video),
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
-<%end%>
 </div>

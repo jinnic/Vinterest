@@ -1,7 +1,7 @@
 <div class="form-group-center  col-6" >
 
 <h3>Board : <%=@board.name%></h3>
-<%= form_for @board do |f|%>
+<%= form_for @board, url: {action: "update"} do |f|%>
   <%=f.label :name%>
   <%=f.text_field :name%>
   </br>
@@ -9,8 +9,8 @@
   <%= f.label :public %>
   </br>
   <%=f.submit%>
-  <%= button_to 'Delete', board_path(@board),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
+  
 <%end%>
+<%= button_to 'Delete', board_path(@board),
+              method: :delete %>
 </div>

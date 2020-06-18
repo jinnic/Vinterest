@@ -133,6 +133,9 @@
   margin: auto;
   margin-top: 1rem;
 }
+.form-group-center .button_to{
+  float: none !important;
+}
 
 .form-group-center input{
   display: block;
