@@ -1,3 +1,26 @@
-<div>
-  URL : <%=video.video_file_name%> | Description: <%=video.description%>
+
+<%video = @video%>
+<div class ="video form-group-center">
+  <div class="card card-show mb-3 col-8" style="width: 100%">
+        <h5 class="card-header">
+      <div class="video-btn-wrapper">
+        <span class="right"><%=link_to image_tag(src="icons/pencil-fill.svg", size: '20', class: "edit-icon "), edit_video_path(video)%><span>
+        <span class="right"><%=link_to image_tag(src="icons/x-circle-fill.svg", size: '20', class: "delete-icon "), delete_video_path(video)%><span>
+    </h5>
+      <div class="embed-responsive embed-responsive-4by3">
+        <%=video.src_modify(video.video_src).construct_iframe.html_safe%>
+      </div>
+        <div class="card-body">
+          <h5 class="card-title"><%=video.video_file_name%></h5>
+          <p class="card-text"><%=video.description%></p>
+          
+          <p class="card-text">
+            <%unless video.board.public %>
+              <%= image_tag(src="icons/lock-fill.svg", size: '15', class: "lock-icon")%> 
+            <%end%>
+            <%= link_to "#{video.board.name.capitalize} board", board_path(video.board), class: "card-link"%>
+            <span class="right">by <%=video.user.username%></span>
+          </p>
+          <p class="card-text"><small class="text-muted">Last updated <%= video.time_diffrence(video)%> ago</small></p>
+        </div>
 </div>

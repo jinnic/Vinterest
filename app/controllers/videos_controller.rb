@@ -4,8 +4,15 @@ class VideosController < ApplicationController
   # before_action :correct_user, only: [:edit, :update, :destroy]
   #
   # GET /videos
+  
+  @@search_videos = []
+  
   def index
-    @videos = Video.all
+   if logged_in?
+      @videos = user_video
+   else
+      @videos = Video.all_videos
+   end
   end
 
   # GET /videos/1
@@ -16,43 +23,30 @@ class VideosController < ApplicationController
 
   # GET /videos/new
   def new
-    @users = User.all
+    # byebug
+    @user = current_user
+    @boards = @user.boards
     @video = Video.new
-    @boards = Board.all
   end
 
   # GET /videos/1/edit
   def  edit
-    @users = User.all
-    @boards = Board.all
+    @user = current_user
+    @boards = @user.boards
     @video = Video.find(params[:id])
-
   end
 
   # POST /videos
   def create
- 
+    # byebug
+    @user = current_user
+    video = @user.videos.build(video_params)
+    video.save
 
-    # @user = current_user
-    # video = @user.videos.build(video_params(:description))
-    # @video = current_user.videos.build(video_params)
-    
-    video = Video.create(video_params)
-    # respond_to do |format|
-    #   if @video.save
-    #     format.html { redirect_to videos_path, notice: 'Video was successfully created.' }
-    #     format.json { render :show, status: :created, location: @video }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @video.errors, status: :unprocessable_entity }
-    #   end
-    # end
-    
     redirect_to board_path(video.board_id) 
   end
 
-  # PATCH/PUT /videos/1
-  # PATCH/PUT /videos/1.json
+
   def update
     video = Video.find(params[:id])
     video.update(video_params)
@@ -61,9 +55,22 @@ class VideosController < ApplicationController
 
   # DELETE /videos/1
   def  destroy
+    # byebug
     video = Video.find(params[:id])
+    board = video.board_id
     video.destroy
-    redirect_to board_path(video.board_id) 
+    
+    redirect_to board_path(board) 
+  end
+
+  # get /videos/1
+  def  delete_img
+    # byebug
+    video = Video.find(params[:id])
+    board = video.board_id
+    video.destroy
+    
+    redirect_to board_path(board) 
   end
 
   def  show_repost
@@ -86,6 +93,48 @@ class VideosController < ApplicationController
     end
   end
 
+  def search
+    search_videos = get_video(params[:search])
+    unless search_videos
+      flash[:alert] = 'videos not found'
+      return render action: :index
+    end
+    @search_videos = []
+    @@search_videos = []
+    count = 0
+    search_videos.each do |video|
+      
+      @@search_videos << {
+                          id: "#{count}", description: "#{video[:description]}",
+                          video_file_name: "#{video[:title]}", 
+                          video_src: "#{(video[:videoId])}"
+                        }
+      count += 1
+    end
+    # byebug
+    @search_videos = @@search_videos
+    # @video = Video.newbyebug
+    render template: 'videos/search'
+  end
+
+  def search_new
+    # byebug
+    @s_video = []
+    @@search_videos.each do |video|
+      # byebug
+       if video[:id] == params[:id]
+        # byebug
+          @s_video = video
+       end
+    end
+    @s_video
+    @user = current_user
+    @boards = @user.boards
+    @video = Video.new
+    # byebug
+    render template: 'videos/add_new'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_video
@@ -94,7 +143,44 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:description, :video_file_name, :board_id, :user_id, :video_src)
+      params.require(:video).permit(:description, :video_file_name, :board_id, :user_id, :video_src, :search)
     end
 
+    def user_video
+      @videos = []
+      videos = Video.all
+      videos.each do |video|
+        if video.user.username == current_user.username
+          @videos << video
+        end
+      end
+      @videos
+    end
+
+    def redirect_to_back_or_default(default = root_url)
+      if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+        redirect_back fallback_location: default
+      else
+        redirect_to default
+      end
+    end
+
+    # API
+  
+    def search_show
+    end
+  
+    def get_video(query)
+      yt_api = ApiYoutube.new(query)
+      @video_searches = yt_api.video
+    end
+  
+    def construct_url(video_id)
+        "https://www.youtube.com/embed/#{video_id}"
+    end
+    #construct iframe for each video
+    # @video_searches.each do |video|
+    #   construct_iframe(construct_url(video[:videoId]))
+    #   video.
+    # end
 end

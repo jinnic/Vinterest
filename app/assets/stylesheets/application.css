@@ -4,7 +4,7 @@
  *
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
  * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
+ 
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
@@ -14,3 +14,138 @@
  *= require_tree .
  *= require_self
  */
+
+.container{
+  padding-top: 90px;
+  margin-top: 1re
+}
+#search{
+  display:block;
+  width: 300px !important;
+  margin: auto;
+  /* text-align:center; */
+  /* width: 30rem; */
+}
+
+.navbar-nav.navbar-center { 
+  position: absolute; 
+  left: 50%; 
+  transform: translatex(-50%); 
+  /* width: 700px; */
+} 
+
+.form-control{
+  width: 100% !important;
+}
+.lock-icon {
+  filter: invert(.5) 
+  /* filter: invert(97%) sepia(6%) saturate(23%) hue-rotate(202deg) brightness(97%) contrast(95%); */
+}
+.edit-icon {
+  filter: invert(.5) 
+  /* filter: invert(97%) sepia(6%) saturate(23%) hue-rotate(202deg) brightness(97%) contrast(95%); */
+}
+
+.edit-icon:hover {
+  filter: invert(.5) sepia(1);
+}
+.delete-icon{
+  filter: invert(.5);
+  margin-left: 0.3rem
+}
+
+.delete-icon:hover {
+  filter: invert(.5) sepia(1);
+  margin-left: 0.3rem
+}
+
+.add-icon{
+  filter: invert(.5);
+  margin-left: 0.3rem
+}
+
+.add-icon:hover {
+  filter: invert(.5) sepia(1);
+  margin-left: 0.3rem
+}
+
+.right{
+  position: relative;
+  float: right;
+}
+
+.left{
+  position: relative;
+  float: left;
+}
+
+.title{
+  vertical-align: inherit;
+  font-family: SANS-SERIF;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+.title-div{
+  justify-content: center; 
+  display: flex; 
+  flex-direction: row;
+}
+
+.sub-title{
+  color: #6c757d;
+
+}
+
+.card{
+  overflow: hidden !important;
+}
+
+.card-show{
+  margin: auto;
+}
+
+.v-center{
+  padding: 1rem;
+}
+
+.search{
+  width: 80% !important; 
+  text-align: left;
+}
+
+
+.button_to{
+  position: relative;
+  float: right;
+} 
+
+.video-btn{
+  display: inline;
+}
+
+.video-btn-wrapper{
+  display: block;
+  height: 2rem;
+}
+
+.form-group-center{
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.form-group-center input{
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
