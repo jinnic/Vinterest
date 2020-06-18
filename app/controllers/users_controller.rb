@@ -9,35 +9,26 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    # @user = @user.user.build
   end
 
   def create
     user = User.create(user_params(:email, :password, :profile, :username))
     session[:user_id] = user.id
     redirect_to '/welcome'
-    # user = @user.users.build(user_params(:description))
-    # user = User.create(user_params(:email, :password, :profile, :username))
-    # redirect_to user_path(user)
   end
 
   def show
     @user = current_user 
     @videos = user_video
-    
     # @user = User.find_by(id: params[:username])
     # @user = User.find_by(username: params[:username])
   end
 
   def edit
-    
     @user = current_user
-    # byebug
   end
 
   def update
-    # byebug
-    
     user = User.find_by(id: params[:id])
     user.update(user_params(:email, :password, :profile, :username))
 
@@ -46,11 +37,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    byebug
     user = User.find_by(id: params[:id])
     # user = User.find_by(username: params[:username])
     user.destroy
-    redirect_to users_path
+    flash[:notice] = "Sorry to let you go #{user.username.capitalize}." 
+    redirect_to root_path
   end
 
   private

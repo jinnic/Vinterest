@@ -11,6 +11,4 @@ module ApplicationHelper
           "alert alert-error "
     end
   end
-
-  
 end

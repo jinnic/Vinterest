@@ -1,6 +1,11 @@
 class BoardsController < ApplicationController
   def index
-    @boards = Board.all
+    # byebug
+    if logged_in?
+      @boards = user_board
+   else
+      @boards = Board.all
+   end
   end
 
   def new
@@ -32,7 +37,6 @@ class BoardsController < ApplicationController
   end
 
   def update
-    # byebug
     board = Board.find(params[:id])
     board.update(board_params)
 
@@ -49,6 +53,17 @@ class BoardsController < ApplicationController
 
   def board_params
     params.require(:board).permit(:name, :user_id, :public)
+  end
+
+  def user_board
+    @boards = []
+    boards = Board.all
+    boards.each do |board|
+      if board.user.username == current_user.username
+        @boards << board
+      end
+    end
+    @boards
   end
 
   def redirect_to_back_or_default(default = root_url)

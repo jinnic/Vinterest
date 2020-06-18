@@ -18,10 +18,11 @@
   </br>
   <%= f.label :board %>
   <%= f.collection_select( :board_id, @boards, :id, :name )%>
-  </br>
-  <%=f.label :user%>
-  <%= f.collection_select( :user_id, @users, :id, :email )%>
+
   </br>
   <%=f.submit%>
-  </br>
+  <%= button_to 'Delete', video_path(@video),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
 <%end%>
+

@@ -3,9 +3,11 @@
   <%=f.label :name%>
   <%=f.text_field :name%>
   </br>
-  <%= f.radio_button :public, include_hidden: true %>
+  <%= f.check_box :public, include_hidden: true %>
   <%= f.label :public %>
   </br>
   <%=f.submit%>
-  </br>
+  <%= button_to 'Delete', board_path(@board),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
 <%end%>

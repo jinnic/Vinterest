@@ -21,7 +21,6 @@ class Video < ApplicationRecord
     videos = Video.all
     @videos = []
     videos.each do |video|
-      # byebug
       if video.board.public
         @videos << video
       end

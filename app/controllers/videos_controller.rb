@@ -5,9 +5,7 @@ class VideosController < ApplicationController
   #
   # GET /videos
   def index
-    # byebug
    if logged_in?
-    
       @videos = user_video
    else
       @videos = Video.all_videos
@@ -32,7 +30,6 @@ class VideosController < ApplicationController
     @users = User.all
     @boards = Board.all
     @video = Video.find(params[:id])
-
   end
 
   # POST /videos
@@ -41,11 +38,11 @@ class VideosController < ApplicationController
     @user = current_user
     video = @user.videos.build(video_params)
     video.save
+
     redirect_to board_path(video.board_id) 
   end
 
-  # PATCH/PUT /videos/1
-  # PATCH/PUT /videos/1.json
+
   def update
     video = Video.find(params[:id])
     video.update(video_params)
@@ -54,9 +51,22 @@ class VideosController < ApplicationController
 
   # DELETE /videos/1
   def  destroy
+    # byebug
     video = Video.find(params[:id])
+    board = video.board_id
     video.destroy
-    redirect_to board_path(video.board_id) 
+    
+    redirect_to board_path(board) 
+  end
+
+  # get /videos/1
+  def  delete_img
+    byebug
+    video = Video.find(params[:id])
+    board = video.board_id
+    video.destroy
+    
+    redirect_to board_path(board) 
   end
 
   def  show_repost
@@ -90,33 +100,37 @@ class VideosController < ApplicationController
     render 'layouts/search'
   end
 
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_video
       @video = Video.find(params[:id])
     end
 
-    def search_params
-      params.permit(:search)
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:video_file_name, :description, :video_src, :board_id, :user_id, :search)
+      params.require(:video).permit(:description, :video_file_name, :board_id, :user_id, :video_src, :search)
     end
 
     def user_video
       @videos = []
       videos = Video.all
       videos.each do |video|
-        if video.user.username == current_user.username || video.board.public 
+        if video.user.username == current_user.username
           @videos << video
         end
       end
       @videos
     end
-# API
+
+    def redirect_to_back_or_default(default = root_url)
+      if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+        redirect_back fallback_location: default
+      else
+        redirect_to default
+      end
+    end
+
+    # API
   
     def search_show
     end
@@ -152,5 +166,4 @@ class VideosController < ApplicationController
     #   construct_iframe(construct_url(video[:videoId]))
     #   video.
     # end
-
 end

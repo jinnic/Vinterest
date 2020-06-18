@@ -5,18 +5,17 @@
      
     <div class="col-sm-6 col-lg-4 mb-4">
     <div class="card">
+    <h5 class="card-header">
+      <div class="video-btn-wrapper">
+        <span class="right"><%=link_to image_tag(src="icons/pencil-fill.svg", size: '20', class: "edit-icon "), edit_video_path(video)%><span>
+        <span class="right"><%=link_to image_tag(src="icons/x-circle-fill.svg", size: '20', class: "delete-icon "), delete_video_path(video)%><span>
+    </h5>
       <div class="embed-responsive embed-responsive-4by3">
         <%=video.src_modify(video.video_src).construct_iframe.html_safe%>
       </div>
         <div class="card-body">
           <h5 class="card-title"><%=video.video_file_name%></h5>
           <p class="card-text"><%=video.description%></p>
-          <%= link_to 'Delete', video_path(video),
-                        method: :delete,
-                        data: { confirm: 'Are you sure?' }, 
-                        class: "card-link"%>
-                <%= link_to 'Edit', edit_video_path(video),
-                        class: "card-link"%>
           <p class="card-text"><small class="text-muted">Last updated <%= video.time_diffrence(video)%> ago</small></p>
         </div>
     </div>  

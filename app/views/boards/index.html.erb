@@ -19,7 +19,7 @@
 <div class="row mt-5">
 <%# <div class="card-deck m-3 mx-auto text-center"> %>
 
-    <% @boards.reverse.each do |board|%>   
+    <% @boards.reverse.each do |board|%> 
     <% video = board.videos.first%>  
     <div class="col-sm-6 col-lg-4 mb-4" ">
     <div class="card m-2" >
@@ -38,9 +38,7 @@
         </div>
       <%end%>
         <div class="card-body">
-          <p class="card-text"> <%= board.videos.count%> videos <span class="text-right"><%=link_to "#{board.user.username}", user_path(board.user.username)%></span></p>
-          <p class="card-text"> </p>
-
+          <p class="card-text"> <%= board.videos.count%> videos <span class="right"><%=link_to "by #{board.user.username}", user_path(board.user.username)%></span></p>
           <p class="card-text"><small class="text-muted">Last updated <%= board.time_diffrence(board)%> ago</small></p>
 
         </div>

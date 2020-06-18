@@ -20,7 +20,7 @@
         <% if current_user.blank? %>
           <%= link_to "Vinterest", root_path, class: "navbar-brand"%>
         <% else %>
-          <%= link_to "Vinterest-user", user_path(current_user.username), class: "navbar-brand"%>
+          <%= link_to "Vinterest", user_path(current_user.username), class: "navbar-brand"%>
         <%end%>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -32,25 +32,24 @@
             <li class="nav-item ">
               <%= link_to "Boards", boards_path, class:"nav-link"%>
             </li>
-          
             <li class="nav-item ">
               <%= link_to "Videos", videos_path, class:"nav-link"%>
             </li>
           <%end%>
           </ul>
-          <ul class="navbar-nav my-2 my-lg-0 input-group mb-3 navbar-center" style="width: 400px !important;" >
-            <form class="navbar-form form-inline" id="search" role="search">
+          <ul class="navbar-nav my-2 my-lg-0  navbar-center">
+          <form class="navbar-form form-inline" id="search" role="search">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search">
+                <%# <button type="submit" class="btn btn-default">Submit</button>  %>
             </div>
-          
-
+          </form>
           </ul>
           <ul class="navbar-nav my-2 my-lg-0">
           <%#byebug%> 
             <% unless current_user.blank? %>
                 <li class="nav-item "><%=link_to 'Edit profile', edit_user_path(current_user), class:"nav-link"%></li>
-                <li class="nav-item  "><%=link_to  'Log out', logout_path, method: :delete, class:"nav-link"%></li>
+                <li class="nav-item  "><%=link_to 'Log out',logout_path, class:"nav-link"%></li>
               <%else%>
                 <li class="nav-item  "><%= link_to 'Log in', login_path, class:"nav-link"%></li>
                 <li class="nav-item  "><%= link_to 'Sign up', new_user_path, class:"nav-link"%></li>
@@ -59,25 +58,12 @@
         </div>
       </nav>
 
-        <% if logged_in? %>
-            <h1>You are Logged In, <%= current_user.username %></h1>
-        <%end%>
         <% flash.each do |type, msg| %>
           <div id="flash" class="<%= flash_class(type) %>">
             <%= msg %>
           </div>
         <% end %>
-
-        
-
         <%= yield %>
     </div>
-    <script>
-        $(document).ready(function(){
-      setTimeout(function(){
-        $('#flash').remove();
-      }, 5000);
-    })
-    </script>
   </body>
 </html>
