@@ -1,24 +1,43 @@
-# README
+# Vinterest #
+by [Hyojin](https://github.com/jinnic)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<kbd>
+  <img src="public/vinterest.gif">  
+</kbd>
 
-Things you may want to cover:
+### About ###
 
-* Ruby version
+Pinterest inspired video sharing social media web
+application. Utilized YouTube API for searching videos
+and wrote a custom library that can format shared
+YouTube and Vimeo links to it’s embedded link.
+ɕɕ Built with Ruby on Rails from back to front.
+ɕɕ Used YouTube API to display search results by titles
+of videos and add it to one of users' boards.
+ɕɕ Used Bootstrap for cohesive styling and masonry
+layout for smooth transition of different size of video
+cards
 
-* System dependencies
+Vinterest allows a user to:
+* Sign up and create an account.
+* Edit their account details.
+* Add video links, edit video information, and delete video.
+* View the video uploaded of other users.
+* Create boards and set it to public or secret.
+* Search for videos and save it to user's board.
 
-* Configuration
 
-* Database creation
+### Built With ###
+* Ruby On Rails, SQL, YouTube API, Bootstrap
 
-* Database initialization
+### Features ###
+* Automatic videoURL change from shared link to embbed video format for Vimeo and YouTube
+* YouTube video search by title
+* Masonary grid with Bootstrap
 
-* How to run the test suite
+### Resources used ###
+* [Figma](https://www.figma.com/) - Creating mockups/prototypes for site layout and design
+* [YouTube API](https://developers.google.com/youtube/v3) - Fetch search result by video titles
+* [Bootstrap](https://getbootstrap.com/) - Masonary grid and responsive design
+* [FontAwesome](FontAwesome) - Icons for edit, delete, secret and public
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

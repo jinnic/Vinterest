@@ -23,7 +23,9 @@
   </br>
   <%= f.label :board %>
   <%= f.collection_select( :board_id, @boards, :id, :name )%>
-
+  </br>
+  <%=f.text_field :board%>
+  
   </br>
   <%=f.submit%>
 <%end%>

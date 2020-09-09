@@ -47,7 +47,7 @@
 }
 
 .edit-icon:hover {
-  filter: invert(.5) sepia(1);
+  filter: invert(49%) sepia(79%) saturate(373%) hue-rotate(114deg) brightness(96%) contrast(89%);
 }
 .delete-icon{
   filter: invert(.5);
@@ -55,7 +55,7 @@
 }
 
 .delete-icon:hover {
-  filter: invert(.5) sepia(1);
+  filter: invert(49%) sepia(79%) saturate(373%) hue-rotate(114deg) brightness(96%) contrast(89%);
   margin-left: 0.3rem
 }
 
@@ -65,7 +65,7 @@
 }
 
 .add-icon:hover {
-  filter: invert(.5) sepia(1);
+  filter: invert(49%) sepia(79%) saturate(373%) hue-rotate(114deg) brightness(96%) contrast(89%);
   margin-left: 0.3rem
 }
 
@@ -99,6 +99,7 @@
 
 .card{
   overflow: hidden !important;
+  border-radius: 0.5rem;
 }
 
 .card-show{
@@ -132,6 +133,9 @@
 .form-group-center{
   margin: auto;
   margin-top: 1rem;
+}
+.form-group-center .button_to{
+  float: none !important;
 }
 
 .form-group-center input{
