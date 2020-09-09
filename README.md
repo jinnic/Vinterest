@@ -9,12 +9,6 @@ Pinterest inspired video sharing social media web
 application. Utilized YouTube API for searching videos
 and wrote a custom library that can format shared
 YouTube and Vimeo links to it’s embedded link.
-ɕɕ Built with Ruby on Rails from back to front.
-ɕɕ Used YouTube API to display search results by titles
-of videos and add it to one of users' boards.
-ɕɕ Used Bootstrap for cohesive styling and masonry
-layout for smooth transition of different size of video
-cards
 
 Vinterest allows a user to:
 * Sign up and create an account.
