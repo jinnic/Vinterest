@@ -1,15 +1,19 @@
-<h1>User New Form</h1>
 
+<div class="form-group-center  col-6" >
+<h1>New User Form</h1>
 <%= form_for @user do |f|%>
+  <%=f.label :username%>
+  <%=f.text_field :username, class: "form-control"%>
+  </br>
   <%=f.label :email%>
-  <%=f.text_field :email%>
+  <%=f.text_field :email, class: "form-control"%>
   </br>
   <%=f.label :password%>
-  <%=f.text_field :password%>
+  <%=f.text_field :password, class: "form-control"%>
   </br>
   <%=f.label :profile%>
-  <%=f.text_field :profile%>
+  <%=f.text_area :profile, class: "form-control"%>
   </br>
   <%=f.submit%>
-  </br>
 <%end%>
+</div>

@@ -1,0 +1,26 @@
+<div class="">
+  <div class="row mt-4 mb-2 title-div">
+    <font style="vertical-align: inherit; padding:0 20px;">
+      <p class="text-center title" > <%=@board.name%></p>
+    </font>
+    <% if @board.user == current_user%>
+    <div class="v-center">
+        <span class="text-center"><%=link_to image_tag(src="icons/pencil-fill.svg", size: '25', class: "edit-icon"), edit_board_path(@board)%><span>
+    </div>
+    <%end%>
+  </div>
+  <div class="mb-5 sub-title">
+      <div class="right mt-4 mr-2">
+        <%= link_to "add video", new_video_path%>
+      </div>
+      <p class="text-center", style="padding: 0 100px;" >
+      <%unless @board.public %>
+        <%= image_tag(src="icons/lock-fill.svg", size: '15', class: "lock-icon")%> 
+      <%end%>
+      <%= @board.public ? "Public" : "Secret"%> board | <%= @board.videos.count%> videos
+      </p>
+      <% unless @board.user == current_user%>
+      <p class="text-center", style="padding: 0 100px;" >saved by <%= @board.user.username.capitalize%></p>
+      <%end%>
+    </div>
+</div>

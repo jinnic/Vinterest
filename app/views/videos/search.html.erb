@@ -1,0 +1,20 @@
+
+<div class="row mt-5" data-masonry='{"percentPosition": true }'>
+    <% @search_videos.reverse.each do |video|%>   
+    <div class="col-sm-6 col-lg-4 mb-4" >
+    <div class="card">
+    <h5 class="card-header">
+      <span class="right"><%=link_to image_tag(src="icons/plus-circle-fill.svg", size: '20', class: "add-icon "), add_search_video_path(video[:id])%><span>
+    </h5>
+    <%#byebug %>
+      <div class="embed-responsive embed-responsive-4by3">
+        <%=construct_video_iframe(video[:video_src]).html_safe%>
+        <div class="card-body">
+          <h5 class="card-title"><%=video[:video_file_name]%></h5>
+          <p class="card-text"><%=video[:description]%></p>
+        </div>
+      </div>
+    </div>  
+    </div>
+    <%end%>
+</div>

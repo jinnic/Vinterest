@@ -1,0 +1,15 @@
+<div class="">
+  <div class="row mt-4 mb-2 title-div">
+    <font style="vertical-align: inherit;">
+      <p class="text-center title" > <%=current_user.username.capitalize%>'s videos</p>
+    </font>
+  </div>
+  <div class="mb-5 sub-title">
+      <div class="right mt-4 mr-2">
+        <%= link_to "add video", new_video_path%>
+      </div>
+      <p class="text-center", style="padding: 0 100px;" >
+        <%= @videos.count%> videos
+      </p>
+  </div>
+</div>

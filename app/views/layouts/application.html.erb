@@ -4,11 +4,16 @@
     <title>Vinterest</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/77bbde81ff.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//cdn.embed.ly/player-0.1.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+    <%# <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script> %>
 
   </head>
 
@@ -16,36 +21,67 @@
   
     <div class = "container">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-          <%= link_to "Pinterest", root_path, class: "navbar-brand"%>
+        <% if current_user.blank? %>
+          <%= link_to "Vinterest", root_path, class: "navbar-brand"%>
+        <% else %>
+          <%= link_to "Vinterest", user_path(current_user.username), class: "navbar-brand"%>
+        <%end%>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav mr-auto ">
+    <% unless current_user.blank? %>
             <li class="nav-item ">
-              <%= link_to "Home", root_path, class:"nav-link"%>
+              <%= link_to "Boards", boards_path, class:"nav-link"%>
             </li>
             <li class="nav-item ">
-              <%= link_to "Pin", new_video_path, class:"nav-link"%>
+              <%= link_to "Videos", videos_path, class:"nav-link"%>
             </li>
+         
+          </ul>
+          <ul class="navbar-nav my-2 my-lg-0  navbar-center">
+<!--- API SEARCH BUTTON--->
+      <%= form_with(url: search_path, method: 'get', local: true) do %>
+            <div class="form-group input-group mb-1">
+              <%= text_field_tag :search, nil, placeholder: 'search', class: 'form-control' %>
+              <div class="input-group-append">
+              <%= button_tag 'Search', class: 'btn btn-outline-secondary' %>
+              </div>
+            </div>
+          <%end%>
+      
+    <%end%>
+<!---TESTING API--->
           </ul>
           <ul class="navbar-nav my-2 my-lg-0">
-          <%# <%byebug%> %>
+          <%#byebug%> 
             <% unless current_user.blank? %>
-                <li class="nav-item "><%=link_to 'Edit profile',edit_user_path(current_user), class:"nav-link"%></li>
-                <li class="nav-item  "><%=link_to 'log out',root_path, method: :delete, class:"nav-link"%></li>
+                <li class="nav-item "><%=link_to 'Edit profile', edit_user_path(current_user), class:"nav-link"%></li>
+                <li class="nav-item  "><%=link_to 'Log out',logout_path, class:"nav-link"%></li>
               <%else%>
-                <li class="nav-item  "><%= link_to 'log in', new_user_path, class:"nav-link"%></li>
-                <li class="nav-item  "><%= link_to 'sign up', new_user_path, class:"nav-link"%></li>
+                <li class="nav-item  "><%= link_to 'Log in', login_path, class:"nav-link"%></li>
+                <li class="nav-item  "><%= link_to 'Sign up', new_user_path, class:"nav-link"%></li>
               <% end %>
           </ul>
         </div>
       </nav>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+
+        <% flash.each do |type, msg| %>
+          <div id="flash" class="<%= flash_class(type) %>">
+            <%= msg %>
+          </div>
+        <% end %>
         <%= yield %>
     </div>
-    
+    <script async="" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+      setTimeout(function(){
+        $('#flash').remove();
+      }, 5000);
+    })
+    </script>
   </body>
 </html>
