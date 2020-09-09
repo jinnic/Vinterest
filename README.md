@@ -2,9 +2,6 @@
 by [Hyojin](https://github.com/jinnic)
 
 ![](vinterest.gif)
-<kbd>
-  <img src="public/vinterest.gif">  
-</kbd>
 
 ### About ###
 
