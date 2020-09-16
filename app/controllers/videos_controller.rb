@@ -18,7 +18,6 @@ class VideosController < ApplicationController
   # GET /videos/1
   def  show
     @video = Video.find(params[:id])
-
   end
 
   # GET /videos/new

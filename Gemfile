@@ -12,7 +12,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 # gem 'optimist', '~> 3.0', '>= 3.0.1'
 
 gem 'bootstrap', '~> 4.5.2'
-gem 'jquery-rails'
+# gem 'jquery-rails'
 #for modal for bootstrap
 gem 'popper_js', '~> 1.14.5'
 
