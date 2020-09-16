@@ -5,7 +5,7 @@ class ApiYoutube
 
   # yt_hash["items"][0]["id"]["videoId"]
   # yt_json = self.get_videos(query)
-  URL = ENV["URL"]
+  URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q="
   TOKEN = ENV["TOKEN"]
   VIDEO_ONLY = "&type=video&videoEmbeddable=true"
 
@@ -17,7 +17,7 @@ class ApiYoutube
 
   def get_json
     query = @query
-    url = URL+query+VIDEO_ONLY+TOKEN
+    url = URL+query+VIDEO_ONLY+'&key='+TOKEN
     uri = URI.parse(url)
     response = Net::HTTP.get_response(uri)
     response.body
