@@ -7,7 +7,7 @@ A Pinterest-inspired web application that enables users to pin their favorite vi
 
 ![](vinterest.gif)
 
-### About ###
+### Functionality ###
 
 Vinterest allows a user to:
 * Sign up and create an account.
@@ -19,7 +19,10 @@ Vinterest allows a user to:
 
 
 ### Built With ###
-* Ruby On Rails, SQL, YouTube API, Bootstrap
+* Ruby On Rails
+* SQL
+* YouTube API
+* Bootstrap
 
 ### Features ###
 * Automatic videoURL change from shared link to embbed video format for Vimeo and YouTube
