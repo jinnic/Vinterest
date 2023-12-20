@@ -1,16 +1,13 @@
-# Vinterest #
-by [Hyojin](https://github.com/jinnic)
+# Vinterest 
+A Pinterest-inspired web application that enables users to pin their favorite videos cross-platform, including Youtube and Vimeo. Built with Ruby On Rails, SQL, YouTube API, and Bootstrap.
 
 [Live @vinterest.herokuapp.com](https://vinterest.herokuapp.com/) ID: demo PW: demo
+<br/>
+
 
 ![](vinterest.gif)
 
-### About ###
-
-Pinterest inspired video sharing social media web
-application. Utilized YouTube API for searching videos
-and wrote a custom library that can format shared
-YouTube and Vimeo links to it’s embedded link.
+### Functionality ###
 
 Vinterest allows a user to:
 * Sign up and create an account.
@@ -22,7 +19,10 @@ Vinterest allows a user to:
 
 
 ### Built With ###
-* Ruby On Rails, SQL, YouTube API, Bootstrap
+* Ruby On Rails
+* SQL
+* YouTube API
+* Bootstrap
 
 ### Features ###
 * Automatic videoURL change from shared link to embbed video format for Vimeo and YouTube
