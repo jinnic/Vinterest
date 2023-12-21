@@ -26,7 +26,7 @@ gem 'popper_js', '~> 1.14.5'
 # gem 'sqlite3', '~> 1.4'
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem "puma", ">= 5.6.7"
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 
